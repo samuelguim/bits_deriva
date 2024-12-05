@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 
 /*
@@ -44,6 +45,7 @@ int main(){
     int quantIngr = 0;
 
     for (int i = 0; i < m; i++){
+        
         scanf("%s %i", nomePorcao, &quantIngr);
         char ingredientes_temp[quantIngr*50];
         char ingredientes [quantIngr][50];
@@ -68,8 +70,12 @@ int main(){
             }
         }
         
-        if (contador >= n/2){
-            printf("porcao tipica");
+        if (contador > quantIngr/2){
+            printf("porcao tipica\n");
+
+        }
+        else {
+            printf("porcao comum\n");
         }
     }
     
