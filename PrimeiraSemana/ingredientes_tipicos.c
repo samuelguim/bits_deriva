@@ -61,10 +61,21 @@ int main(){
             j++;
         }
         
+        // conta quantos ingredientes são típicos
         int contador = 0;
         for(int i = 0; i < quantIngr; i++){
             for (int j = 0; j < n; j++){
-                if (strcmp(ingredientes[i], tipicos[j])){
+                if (strcmp(ingredientes[i], tipicos[j]) == 0){
+                    contador++;
+                }
+            }
+        }
+
+        // conta quantos ingredientes são porções típicas
+        char porcoesTipicas[50][m];
+        for(int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                if (strcmp(ingredientes[i], tipicos[j]) == 0){
                     contador++;
                 }
             }
