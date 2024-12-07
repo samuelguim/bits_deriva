@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 
-bool confereTipico (int i, int n, int m, int quantIngr, char ingredientes[quantIngr][m][50], char porcoesTipicas[50][m], char tipicos2[n][50]){
+bool confereTipico (int i, int n, int m, int quantIngr, char ingredientes[m][quantIngr][50], char porcoesTipicas[50][m], char tipicos2[n][50]){
     int contador = 0;
     for(int k = 0; k < quantIngr; k++){
         for (int j = 0; j < n; j++){
@@ -21,10 +21,9 @@ bool confereTipico (int i, int n, int m, int quantIngr, char ingredientes[quantI
             }
         }
     }
-    if(quantIngr != 0){
-        if (contador > quantIngr/2){
+    if (contador > quantIngr/2){
         return true;
-    }
+
     }
     else {
         return false;
@@ -53,16 +52,16 @@ int main(){
     }
 
     scanf("%i", &m);
-    char tiposDePorcao[m][13];
+    char tiposDePorcao[m][15];
     char porcoesTipicas[50][m];
 
     for (int i = 0; i < m; i++){
         char nomePorcao[50];
-        int quantIngr = 0;
-        scanf("%s %i", nomePorcao, &quantIngr);
+        int quantIngr[m];
+        scanf("%s %i", nomePorcao, &quantIngr[i]);
 
-        char ingredientes_temp[m][quantIngr*50];
-        char ingredientes[m][quantIngr][50];
+        char ingredientes_temp[m][quantIngr[i]*50];
+        char ingredientes[m][quantIngr[i]][50];
         scanf(" %[^\n]s", ingredientes_temp[i]);
         int j = 0;
 
@@ -73,7 +72,7 @@ int main(){
         }
 
 
-        for (int l = 0; l < quantIngr; l++){
+        for (int l = 0; l < quantIngr[i]; l++){
             int k = 0;
             while(ingredientes_temp[i][j] != ' ' && j < n*50){
                 ingredientes[i][l][k] = ingredientes_temp[i][j];
@@ -83,17 +82,27 @@ int main(){
             j++;
         }
         
-        if (confereTipico(i, n, m, quantIngr, ingredientes, porcoesTipicas, tipicos2)){
+        if (confereTipico(i, n, m, quantIngr[i], ingredientes, porcoesTipicas, tipicos2)){
             strcpy(tiposDePorcao[i],"porcao tipica");
-            //printf("porcao tipica\n");
+            
         }
         else {
             strcpy(tiposDePorcao[i],"porcao comum");
-            //printf("porcao comum\n");
+        }
+
+        for (int o = 0; o < i; o++){
+            if (confereTipico(o, n, m, quantIngr[o], ingredientes, porcoesTipicas, tipicos2)){
+                    strcpy(tiposDePorcao[o],"porcao tipica");
+                    
+                }
+                else {
+                    strcpy(tiposDePorcao[o],"porcao comum");
+                }
         }
 
         if (i == m-1){
             for (int p = 0; p < m; p++){
+                
                 printf("%s\n", tiposDePorcao[p]);
             }
         }
