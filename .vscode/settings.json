@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "array": "c",
         "string": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "ostream": "cpp"
     }
 }
