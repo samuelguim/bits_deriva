@@ -17,5 +17,15 @@ def checa_balanco(exp, i, c):
 
 
 
+while True:
+    try:
+        expressao = input()
+        if checa_balanco(expressao,0,0):
+            print('correct')
+        else:
+            print('incorrect')
+    except EOFError:
+        break
+
 
     
