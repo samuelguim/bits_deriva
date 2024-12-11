@@ -1,8 +1,4 @@
 # 1609 - Contando Carneirinhos
-# TLE
-#16:30
-
-# f = open('SegundaSemana/teste.txt', )
 
 import sys
 
