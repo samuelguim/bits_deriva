@@ -1,5 +1,3 @@
-
-
 def confereInicial(sequencia, i, j):
     substancia = sequencia[i][j]
     for i in range(len(sequencia)):
