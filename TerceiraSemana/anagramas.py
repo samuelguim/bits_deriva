@@ -39,5 +39,8 @@ anagramas.sort()
 
 for i in range(1, len(anagramas)):
     for j in range(len(anagramas[i])):
-        print(anagramas[i][j][0], end=" ")
+        if (j == len(anagramas[i])-1):
+            print(anagramas[i][j][0], end="")
+        else:
+            print(anagramas[i][j][0], end=" ")
     print ('')
