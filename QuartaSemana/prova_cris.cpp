@@ -40,6 +40,13 @@ int posicao_diferenca_string(string a, string b){
 }
 
 void trocar_palavras(string palavras[], int a, int b){
+    for (int i = a; i < b; i++){
+        int prox = i + 1;
+        troca_simples(palavras, i, prox);
+    }
+}
+
+void troca_simples(string palavras[], int a, int b){
     string temp = palavras[a];
     palavras[a] = palavras[b];
     palavras[b] = temp;
@@ -48,6 +55,7 @@ void trocar_palavras(string palavras[], int a, int b){
 int main(){
     int n, k;
     int instancia = 0;
+    string str_instancia;
     vector<string> resultadofinal;
 
     do{
@@ -58,7 +66,8 @@ int main(){
             cin >> alunos[i];
         }
 
-        resultadofinal.push_back("Instância " + (instancia + 1));
+        str_instancia = "Instância " + to_string(instancia + 1);
+        resultadofinal.push_back(str_instancia);
         resultadofinal[instancia] = resultadofinal[instancia] + "\n";
 
         for(int j = 0; j < k; j++){
@@ -91,6 +100,8 @@ int main(){
     instancia++;
     } while (n != 0 || k != 0);
 
-    for (int i = 0; i < resultadofinal.size(); i++);
+    for (int i = 0; i < resultadofinal.size(); i++){
+        cout << resultadofinal[i];
+    };
     return 0;
 }
