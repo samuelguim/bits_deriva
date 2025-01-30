@@ -1,3 +1,8 @@
+# bits à deriva
+# Samuel Guimarães Silva
+# João Guilherme Alves
+# Caio Vinicius da Cruz Coelho
+
 from numpy import ones,vstack
 from numpy.linalg import lstsq
 import sympy
@@ -26,20 +31,23 @@ for j in range(i):
     estrela2 = [(todas_coord[j][1][0],todas_coord[j][1][1]),(todas_coord[j][3][0],todas_coord[j][3][1])]
 
     #equação estrela 1
-    x_estrela1, y_estrela1 = zip(*estrela1)
-    A = vstack([x_estrela1,ones(len(y_estrela1))]).T
-    m1, c1 = lstsq(A, y_estrela1)[0]
+    
+    m1 = (estrela1[1][1]-estrela1[0][1])/(estrela1[1][0]-estrela1[0][0])
+    c1 = (m1*estrela1[0][0]*-1)+estrela1[0][1]
+
     #print("A solução da equação da estrela 1 é: y={m1}x+{c1}".format(m1=m1,c1=c1))
 
     #equação estrela 2
-    x_estrela2, y_estrela2 = zip(*estrela2)
-    A = vstack([x_estrela2,ones(len(y_estrela2))]).T
-    m2, c2 = lstsq(A, y_estrela2)[0]
+    m2 = (estrela2[1][1]-estrela2[0][1])/(estrela2[1][0]-estrela2[0][0])
+    c2 = (m2*estrela2[0][0]*-1)+estrela2[0][1]
     #print("A solução da equação da estrela 1 é: y={m2}x+{c2}".format(m2=m2,c2=c2))
 
     #perpendicular estrela1
     ponto_medio_1 = (((estrela1[0][0]+estrela1[1][0])/2), ((estrela1[0][1]+estrela1[1][1])/2))
-    mp1 = (m1/(m1*m1))*-1
+    if (m1 == 0):
+        mp1 = 0
+    else:
+        mp1 = (m1/(m1*m1))*-1
     cp1 = (mp1*ponto_medio_1[0]*-1)+ponto_medio_1[1]
     #print("A perpendicular da estrela 2 é: y={mp1}x+{cp1}".format(mp1=mp1,cp1=cp1))
 
@@ -58,6 +66,7 @@ for j in range(i):
     resultado = sympy.solve((eq1, eq2), 
                 (x, y))
     
-    result_x = resultado.get('x')
-
-    print (result_x)
+    result_x = round(resultado.get(sympy.Symbol('x')),2)
+    result_y = round(resultado.get(sympy.Symbol('y')),2)
+    case = j + 1
+    print ("Caso #" + str(case) + ": " + str(result_x) + " " + str(result_y))
