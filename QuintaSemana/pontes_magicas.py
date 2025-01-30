@@ -19,7 +19,6 @@ def bfs_teste(grafo, no_inicial, sons, visitados):
                 if visitados[vizinho-1] == 0:
                     q.append(vizinho) 
                     
-    #print(f'ligacoes: {qtd_ligacoes_BB//2}')
     return contador
 
 sys.stdin = open('teste.txt', 'r')
@@ -36,16 +35,12 @@ def main():
                 conexoes.setdefault(a, []).append(b)
                 conexoes.setdefault(b, []).append(a)
 
-            lista_visitados = [0] * qtd_torres
-            #print(f'VISITADOS: {lista_visitados}')
+            lista_visitados = [0] * (qtd_torres+1)
             possivel = True
 
-            #print(f'Grafo: {conexoes}')
-            #print(f'Sons: {sons_iniciais}')
-            for i in range(qtd_torres):
+            for i in range(1, qtd_torres+1):
                 if lista_visitados[i] == 0:
-                    contador = bfs_teste(conexoes,i+1,sons_iniciais,lista_visitados)
-                    #print(f'CONTADOR: {contador}')
+                    contador = bfs_teste(conexoes,i,sons_iniciais,lista_visitados)
                     if contador % 2 != 0:
                         possivel = False
                         break    
@@ -61,7 +56,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()              
+    main()             
                     
 
 g = {
