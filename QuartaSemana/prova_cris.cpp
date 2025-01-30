@@ -75,26 +75,33 @@ int main(){
         resultadofinal[instancia] = resultadofinal[instancia] + "\n";
 
         //busca a maior diferença na ordem lexicográfica
-        int menor_posicao = 20;
-        int maior_diferenca = 0;
-        int posicao_a_trocar = 0;
-        int trocas_realizadas = 0;
+        
+
 
         for(int j = 0; j < n; j++){
+
+            int menor_posicao = 20;
+            int maior_diferenca = 0;
+            int posicao_a_trocar = 0;
+            int trocas_realizadas = 0;
+
             for(int i = 1; i <= k; i++){
                 int proximo = j + i;
-                if(sizeof(alunos) < proximo){
-                    if (posicao_diferenca_string(alunos[j], alunos[proximo]) <  menor_posicao && posicao_diferenca_string(alunos[j], alunos[proximo]) !=0){
-                        if (alunos[j].compare(alunos[proximo]) > maior_diferenca){
+                if(proximo < n){
+                    if (posicao_diferenca_string(alunos[j], alunos[proximo]) <=  menor_posicao && posicao_diferenca_string(alunos[j], alunos[proximo]) !=0){
+                        if (alunos[j].compare(alunos[proximo]) >= maior_diferenca){
                             menor_posicao = posicao_diferenca_string(alunos[j], alunos[proximo]);
                             maior_diferenca = alunos[j].compare(alunos[proximo]);
-                            posicao_a_trocar = i;
+                            posicao_a_trocar = proximo;
                         }
                     }
                 }
             }
-            int prox = posicao_a_trocar + 1;
-            trocar_palavras(alunos, posicao_a_trocar, prox);
+            trocar_palavras(alunos, j, posicao_a_trocar);
+            trocas_realizadas = trocas_realizadas + (posicao_a_trocar - j);
+            if (trocas_realizadas >= k){
+                break;
+            }
         }
 
         //imprime o resultado
