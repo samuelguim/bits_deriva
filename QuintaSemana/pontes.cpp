@@ -1,59 +1,62 @@
+// 1203 Pontes de São Petersburgo
+// bits à deriva
+// Samuel Guimarães Silva
+// João Guilherme Alves
+// Caio Vinicius da Cruz Coelho
+
 #include <iostream>
-#include <list>
-#include <cstdio>
+#include <vector>
+#include <cstring>
 
 using namespace std;
 
-bool confereSomaSubset(int elementos[], int n, int soma){
-    if (soma == 0){
-        return true;}
-    if (n < 0) {
-        return false;}
+bool confereSomaSubset(const int elementos[], int n, int soma) {
+    if (soma == 0) return true;
+    if (n == 0) return false;
 
-    bool soma_subset[n][soma+1];
-
-    for(int i = 0; i < n; i++){
-        soma_subset[0][i] = true;
+    int total = 0;
+    for (int i = 0; i < n; ++i) {
+        total += elementos[i];
     }
+    if (soma > total) return false;
 
-    for(int i = 1; i <= soma; i++){
-        for (int j = 0; j < n; j++){
-            soma_subset[i][j] = (soma_subset[i-1][j] || soma_subset[i-1][j-elementos[j]]);
+    vector<bool> dp(soma + 1, false);
+    dp[0] = true;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = soma; j >= elementos[i]; --j) {
+            if (dp[j - elementos[i]]) {
+                dp[j] = true;
+                if (j == soma) break;
+            }
         }
     }
-    
-    return soma_subset[n-1][soma];
+
+    return dp[soma];
 }
 
-int main(){
-    list<char> respostas;
+int main() {
+    vector<char> respostas;
     int r, k;
-    while(cin>>r>>k){
-        list<int> regioes[r];
-        int pontes_por_regiao[r];
-        for(int i = 0; i < r; i++){
-            regioes[i] = {};
-        }
-        for (int i = 0; i < k; i++){
+    while (cin >> r >> k) {
+        vector<int> pontes_por_regiao(r, 0);
+        for (int i = 0; i < k; ++i) {
             int inicio, destino;
             cin >> inicio >> destino;
-            //cuidado com erros na lista
-            regioes[inicio-1].push_back(destino-1);
-            regioes[destino-1].push_back(inicio-1);
-        }
-        for (int i = 0; i < r; i++){
-            pontes_por_regiao[i] = regioes[i].size();
+            pontes_por_regiao[inicio - 1]++;
+            pontes_por_regiao[destino - 1]++;
         }
 
-        if (confereSomaSubset(pontes_por_regiao, r, k) == true){
+        if (confereSomaSubset(pontes_por_regiao.data(), r, k)) {
             respostas.push_back('S');
-        }
-        else {
+        } else {
             respostas.push_back('N');
         }
     }
-    for (auto i : respostas){
-        cout << i << "\n";
+
+    for (char res : respostas) {
+        cout << res << "\n";
     }
+
     return 0;
 }
