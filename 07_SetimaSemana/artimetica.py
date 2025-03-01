@@ -1,3 +1,9 @@
+# 1212 Aritmética Primária
+# bits à deriva
+# Samuel Guimarães Silva
+# João Guilherme Alves
+# Caio Vinicius da Cruz Coelho
+
 def main():
     resultados = []
     while True:

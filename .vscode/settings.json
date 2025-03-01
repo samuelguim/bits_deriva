@@ -2,5 +2,6 @@
     "files.associations": {
         "iostream": "cpp",
         "random": "cpp"
-    }
+    },
+    "idf.pythonInstallPath": "/home/codespace/.python/current/bin/python"
 }

@@ -1,6 +1,11 @@
+#2674 Super Primos: Ativar!
+# bits à deriva
+# Samuel Guimarães Silva
+# João Guilherme Alves
+# Caio Vinicius da Cruz Coelho
+
 import math
 import sys
-
 
 def main():
     resposta = []

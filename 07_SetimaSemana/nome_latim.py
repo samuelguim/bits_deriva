@@ -1,3 +1,9 @@
+#1580 Quid Est Veritas? Est Vir Qui Adest!
+# bits à deriva
+# Samuel Guimarães Silva
+# João Guilherme Alves
+# Caio Vinicius da Cruz Coelho
+
 MOD = 10**9 + 7  
 
 def fatorial(n, mod):
