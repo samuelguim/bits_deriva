@@ -27,7 +27,7 @@ def main():
 
             posicoes_possiveis = (N*N)-(N+N-3)
             if (K > 0):
-                combinacoes = possibilidades_canto + possibilidades_borda + possibilidades_centro
+                combinacoes = (possibilidades_canto + possibilidades_borda + possibilidades_centro)*K
                 combinacoes = combinacoes % 1000000007
             respostas.append(combinacoes)
         
