@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
-#include <unordered_set>
 
 using namespace std;
 
@@ -68,6 +67,7 @@ void remover_pontos(vector<Ponto>& pontos_originais, vector<Ponto>& pontos_a_rem
 
 
 int main(){
+    vector <bool> respostas;
     int N;
     cin >> N;
     while (N != 0){
@@ -91,14 +91,20 @@ int main(){
             quantidade_camadas = quantidade_camadas + 1;
         }
         if (quantidade_camadas % 2 == 0){
-            cout << "Take this onion to the lab!!\n";
+            respostas.push_back(true);
         }
         else{
+            respostas.push_back(false);
+        }
+        cin >> N;
+    }
+    for (int i = 0; i < respostas.size(); i++){
+        if (respostas[i]){
+            cout << "Take this onion to the lab!\n";
+        }
+        else {
             cout << "Do not take this onion to the lab!\n";
         }
-
-        
-        cin >> N;
     }
     return 0;
 }
