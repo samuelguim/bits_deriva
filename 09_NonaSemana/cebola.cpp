@@ -67,18 +67,46 @@ vector<Ponto> graham_scan(vector<Ponto> pontos) {
     return pilha;
 }
 
+void remover_elementos(vector<Ponto>& vetor_original, const vector<Ponto>& elementos_a_remover) {
+    for (Ponto elemento : elementos_a_remover) {
+        vetor_original.erase(
+            remove(vetor_original.begin(), vetor_original.end(), elemento),
+            vetor_original.end()
+        );
+    }
+}
+
 int main(){
     int N;
     cin >> N;
     while (N != 0){
         vector <Ponto> pontos;
+
+        Ponto pt;
         for (int i = 0; i < N; i++){
             int x, y;
             cin >> x >> y;
-            pontos[i].x = x;
-            pontos[i].y = y;
+            pt.x = x;
+            pt.y = y;
+            pontos.push_back(pt);
         }
+
+        int quantidade_camadas = 0;
+        vector <Ponto> camada;
+        while (pontos.size() > 0){
+            camada.clear();
+            camada = graham_scan(pontos);
+            remover_elementos(pontos, camada);
+        }
+        if (quantidade_camadas % 2 == 0){
+            cout << " Do not take this onion to the lab!";
+        }
+        else{
+            cout << "Take this onion to the lab!";
+        }
+
         
+        cin >> N;
     }
     return 0;
 }
