@@ -71,11 +71,14 @@ int main(){
     int N;
     cin >> N;
     while (N != 0){
+        vector <Ponto> pontos;
         for (int i = 0; i < N; i++){
             int x, y;
             cin >> x >> y;
-            
+            pontos[i].x = x;
+            pontos[i].y = y;
         }
+        
     }
     return 0;
 }
