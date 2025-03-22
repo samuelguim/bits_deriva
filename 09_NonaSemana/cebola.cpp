@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <unordered_set>
 
 using namespace std;
 
@@ -67,14 +68,16 @@ vector<Ponto> graham_scan(vector<Ponto> pontos) {
     return pilha;
 }
 
-void remover_elementos(vector<Ponto>& vetor_original, const vector<Ponto>& elementos_a_remover) {
-    for (Ponto elemento : elementos_a_remover) {
-        vetor_original.erase(
-            remove(vetor_original.begin(), vetor_original.end(), elemento),
-            vetor_original.end()
-        );
+void remover_pontos(vector<Ponto>& pontos_originais, vector<Ponto>& pontos_a_remover) {
+    for (int i = 0; i < pontos_a_remover.size(); i++){
+        for (int j = 0; j < pontos_originais.size(); j++){
+            if (pontos_a_remover[i].x == pontos_originais[j].x && pontos_a_remover[i].y == pontos_originais[j].y){
+                pontos_originais.erase(pontos_originais.begin()+i);
+            }
+        }
     }
 }
+
 
 int main(){
     int N;
@@ -96,7 +99,7 @@ int main(){
         while (pontos.size() > 0){
             camada.clear();
             camada = graham_scan(pontos);
-            remover_elementos(pontos, camada);
+            remover_pontos(pontos, camada);
         }
         if (quantidade_camadas % 2 == 0){
             cout << " Do not take this onion to the lab!";
